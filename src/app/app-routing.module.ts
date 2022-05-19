@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'drawing',
     loadChildren: () => import('./drawing/drawing.module').then( m => m.DrawingPageModule)
   },
+  {
+    path: 'lobby',
+    loadChildren: () => import('./lobby/lobby.module').then( m => m.LobbyPageModule)
+  },
 ];
 
 @NgModule({

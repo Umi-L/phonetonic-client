@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataPassService } from '../data-pass.service';
 
 interface Pixel {
   r: number,
@@ -22,9 +24,8 @@ interface ConnectionPacket extends packet{
 export class HomePage {
 
   socket: WebSocket;
-
-  constructor() {
-  }
+  
+  constructor(private router: Router, private DataPassService: DataPassService){}
 
   connect(): void {
     console.log("connecting");
@@ -34,11 +35,15 @@ export class HomePage {
 
     this.socket = new WebSocket(url);
 
-    this.socket.onopen = function (e) {
+    this.socket.onopen = (e) => {
 
       let data: ConnectionPacket = { method:"connect", username: username }
 
-      this.send(JSON.stringify(data));
+      this.socket.send(JSON.stringify(data));
+
+      this.DataPassService.setData(this.socket);
+
+      this.router.navigate(['/lobby']);
     };
 
     this.socket.onmessage = (ev: MessageEvent) => {
