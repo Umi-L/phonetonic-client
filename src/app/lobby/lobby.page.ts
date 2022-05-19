@@ -74,5 +74,6 @@ export class LobbyPage implements OnInit {
     card.appendChild(cardBody);
 
     document.getElementById("users").appendChild(card);
+    console.log("card created");
   }
 }
