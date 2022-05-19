@@ -1,0 +1,7 @@
+{
+  "name": "phonetonic-client",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

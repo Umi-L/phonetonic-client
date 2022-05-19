@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Phonetonic
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="flex-container">
+    <ion-card class="join-card">
+      <ion-card-header><h2>Join Game</h2></ion-card-header>
+      <ion-card-content>
+        <ion-input id="username-input" placeholder="Username" style="background: rgb(22, 22, 22);"></ion-input>
+        <ion-input value="ws://localhost:8999" id="ip-input" placeholder="Server IP" style="background: rgb(22, 22, 22);"></ion-input>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button style="width: 20%; background: rgb(22, 22, 22);" (click)="connect()">join</ion-button>
+    <ion-button style="width: 20%; background: rgb(22, 22, 22);" (click)="packetSendTest()">sendPacket</ion-button>
+
+  </div>
+
+</ion-content>
