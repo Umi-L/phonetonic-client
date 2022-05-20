@@ -53,5 +53,9 @@ export class HomePage {
     this.socket.onerror = (ev) => {
       console.error(ev);
     }
+
+    window.onbeforeunload = () => {
+      this.socket.close();
+    }
   }
 }

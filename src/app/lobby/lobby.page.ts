@@ -29,7 +29,12 @@ export class LobbyPage implements OnInit {
       method: "getPlayers"
     }
 
+    let selfRequest:packet = {
+      method: "getSelf"
+    }
+
     this.socket.send(JSON.stringify(usersRequest));
+    this.socket.send(JSON.stringify(selfRequest));
 
     this.socket.onmessage = (ev: MessageEvent) => {
       let message:any;
@@ -48,10 +53,16 @@ export class LobbyPage implements OnInit {
         case "updateUsers":
           this.makeUserProfiles(message["data"]);
           break;
+        
+        case "sendSelf":
+
+          console.log("recieved self")
+
+          this.showLeaderControls();
+          break;
 
         default:
-          console.log("unknown message recived");
-          break;
+          console.log(`unknown packet: ${message}`)
       }
     };
   }
@@ -64,8 +75,6 @@ export class LobbyPage implements OnInit {
 
     keys.forEach((key:string) =>{
       let user = data[key];
-
-      console.log(user);
 
       this.makeUserCard(user);
     })
@@ -83,5 +92,9 @@ export class LobbyPage implements OnInit {
     card.appendChild(cardBody);
 
     document.getElementById("users").appendChild(card);
+  }
+
+  showLeaderControls():void{
+    document.getElementById("leader-controls").setAttribute("style", "");
   }
 }
