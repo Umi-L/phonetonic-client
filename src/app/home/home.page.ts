@@ -54,8 +54,4 @@ export class HomePage {
       console.error(ev);
     }
   }
-
-  packetSendTest() {
-    this.socket.send("test");
-  }
 }

@@ -22,8 +22,7 @@ export class LobbyPage implements OnInit {
     this.socket = this.DataPassService.getData();
 
     if (!this.socket){
-      this.router.navigate(['/home']);
-      return;
+      window.location.href = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/home"
     }
 
     let usersRequest:packet = {
@@ -37,8 +36,10 @@ export class LobbyPage implements OnInit {
       
       try {
         message = JSON.parse(ev.data);
+        console.log(message.method);
       }
       catch(e){
+        console.log(`could not parse ${ev.data}`)
         console.error(e);
         return;
       }
@@ -46,18 +47,26 @@ export class LobbyPage implements OnInit {
       switch(message["method"]){
         case "updateUsers":
           this.makeUserProfiles(message["data"]);
+          break;
 
         default:
           console.log("unknown message recived");
+          break;
       }
     };
   }
 
   makeUserProfiles(data:any){
+    document.getElementById("users").innerHTML = "";
+
     let keys = Object.keys(data);
+
 
     keys.forEach((key:string) =>{
       let user = data[key];
+
+      console.log(user);
+
       this.makeUserCard(user);
     })
   }
@@ -68,12 +77,11 @@ export class LobbyPage implements OnInit {
     let cardHead = document.createElement("ion-card-title");
     let cardBody = document.createElement("ion-card-content");
 
-    cardHead.innerHTML = user.username;
+    cardHead.innerHTML = "<h2 style='margin-left:5%;'>" + user.username + "</h2>";
     
     card.appendChild(cardHead);
     card.appendChild(cardBody);
 
     document.getElementById("users").appendChild(card);
-    console.log("card created");
   }
 }

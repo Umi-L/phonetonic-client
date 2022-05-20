@@ -8,19 +8,24 @@ import { Component, OnInit } from '@angular/core';
 export class DrawingPage implements OnInit {
   constructor() { }
 
+  public canvas:HTMLCanvasElement;
+  public ctx:CanvasRenderingContext2D;
+
   ngOnInit() {
     console.log('started');
 
-    let canvas = <HTMLCanvasElement>document.getElementById('canvas');
-    canvas.height = 700;
-    canvas.width = 700;
-    let ctx = canvas.getContext('2d');
-    ctx.lineWidth = 5;
+    this.canvas = <HTMLCanvasElement>document.getElementById('canvas');
+    this.canvas.height = 700;
+    this.canvas.width = 700;
+    this.ctx = this.canvas.getContext('2d');
+    this.ctx.lineWidth = 5;
 
     let prevX = null;
     let prevY = null;
 
     let draw = false;
+
+    document.getElementById("picker").onchange = this.changeColor;
 
     // let clrs: any = document.querySelectorAll('.clr');
     // clrs = Array.from(clrs);
@@ -47,8 +52,8 @@ export class DrawingPage implements OnInit {
     window.addEventListener('mousedown', (e) => (draw = true));
     window.addEventListener('mouseup', (e) => (draw = false));
 
-    window.addEventListener('mousemove', function (e) {
-      let rect = canvas.getBoundingClientRect();
+    window.addEventListener('mousemove', (e) => {
+      let rect = this.canvas.getBoundingClientRect();
 
       if (prevX == null || prevY == null || !draw) {
         prevX = e.clientX - rect.x;
@@ -59,13 +64,20 @@ export class DrawingPage implements OnInit {
       let mouseX = e.clientX - rect.x;
       let mouseY = e.clientY - rect.y;
 
-      ctx.beginPath();
-      ctx.moveTo(prevX, prevY);
-      ctx.lineTo(mouseX, mouseY);
-      ctx.stroke();
+      this.ctx.beginPath();
+      this.ctx.moveTo(prevX, prevY);
+      this.ctx.lineTo(mouseX, mouseY);
+      this.ctx.stroke();
 
       prevX = mouseX;
       prevY = mouseY;
     });
+  }
+
+  changeColor = () => {
+    let value = (<HTMLInputElement>document.getElementById("picker")).value;
+    this.ctx.strokeStyle = value;
+
+    console.log(value);
   }
 }

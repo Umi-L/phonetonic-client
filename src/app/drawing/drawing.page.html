@@ -3,8 +3,15 @@
     <ion-title>
       Phonetonic
     </ion-title>
+
+    <ion-buttons slot="end">
+      <input id="picker" type="color">
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <canvas id="canvas"></canvas>
+  <div>
+    <canvas id="canvas"></canvas>
+  </div>
 </ion-content>
