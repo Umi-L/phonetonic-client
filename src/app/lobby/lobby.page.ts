@@ -65,7 +65,8 @@ export class LobbyPage implements OnInit {
           break;
 
         case "startGame":
-          console.log("started");
+          this.router.navigate(['/prompt']);
+          
           break;
 
         default:

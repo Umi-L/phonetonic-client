@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class DataPassService {
 
   data:any;
-  authData:any;
+  promptData:any;
 
   constructor() { }
 
@@ -16,5 +16,13 @@ export class DataPassService {
 
   setData(_data){
     this.data = _data;
+  }
+
+  getPromptData(){
+    return this.promptData;
+  }
+
+  setPromptData(_data){
+    this.promptData = _data;
   }
 }

@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'lobby',
     loadChildren: () => import('./lobby/lobby.module').then( m => m.LobbyPageModule)
   },
+  {
+    path: 'prompt',
+    loadChildren: () => import('./prompt/prompt.module').then( m => m.PromptPageModule)
+  },
 ];
 
 @NgModule({
