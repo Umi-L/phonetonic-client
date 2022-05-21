@@ -7,6 +7,7 @@
     <ion-buttons slot="end">
       <input id="picker" type="color">
 
+
       <ion-button (click)="undoAction()">
         <ion-icon slot="icon-only" name="arrow-undo-outline"></ion-icon>
       </ion-button>
@@ -14,12 +15,47 @@
       <ion-button (click)="clearCanvasTool()">
         <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
       </ion-button>
+
     </ion-buttons>
+
+
+    
+
 
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
+  <div class="left-toolbar">
+
+    <ion-button class="tool-button" color="light" (click)="selectTool('pen');">
+      <ion-icon name="pencil-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button class="tool-button" color="light" (click)="selectTool('fill');">
+      <ion-icon name="color-fill-outline"></ion-icon>      
+    </ion-button>
+
+    <ion-button class="tool-button" color="light" (click)="selectTool('line');">
+      <ion-icon name="analytics-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button class="tool-button" color="light" (click)="selectTool('rectangle');">
+      <ion-icon name="square-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button class="tool-button" color="light" (click)="selectTool('elipse');">
+      <ion-icon name="ellipse-outline"></ion-icon>
+    </ion-button>
+      
+  </div>
+
   <div>
     <canvas id="canvas"></canvas>
+  </div>
+  <div style="width: 30%;" class="bottom-toolbar">
+    <ion-icon name="ellipse-outline"></ion-icon>
+    <ion-range id="line-size" min="1" max="10" value="5" (ionChange)="changeLineSize()"></ion-range>
+    <ion-icon name="ellipse-outline" style="font-size: 1.5em;"></ion-icon>
+
   </div>
 </ion-content>

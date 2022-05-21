@@ -13,7 +13,13 @@
 </ion-header>
 
 <ion-content>
-  <div id="users">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="play-button" style="visibility: hidden;">
+    <ion-fab-button (click)="startGame()">
+      <ion-icon name="caret-forward-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
+  <div id="users">
+    
   </div>
 </ion-content>

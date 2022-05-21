@@ -58,11 +58,19 @@ export class LobbyPage implements OnInit {
 
           console.log("recieved self")
 
-          this.showLeaderControls();
+          if (message.data.isPartyLeader){
+            this.showLeaderControls();
+          }
+
+          break;
+
+        case "startGame":
+          console.log("started");
           break;
 
         default:
           console.log(`unknown packet: ${message}`)
+          break;
       }
     };
   }
@@ -96,5 +104,17 @@ export class LobbyPage implements OnInit {
 
   showLeaderControls():void{
     document.getElementById("leader-controls").setAttribute("style", "");
+    document.getElementById("play-button").setAttribute("style", "");
+  }
+
+  startGame(){
+    let data = {
+      method: "startGame",
+      data: {
+        gameType: "default"
+      }
+    }
+
+    this.socket.send(JSON.stringify(data));
   }
 }
